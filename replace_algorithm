@@ -1,133 +1,214 @@
-		mov		r0, #0x3E8	; Direccion de memoria inicial, deberia ser 0
-		mov		r1, #0		; Contador para llenar la memoria de valores iniciales FF
-		mov		r2, #0xFF		; Valor inicial para los datos de la memoria
-		
+			mov		r0, #0x400	; Direccion de memoria inicial, deberia ser 0
+			mov		r1, #0		; Contador para llenar la memoria de valores iniciales FF
+			mov		r2, #0xFF		; Valor inicial para los datos de la memoria
+			
 ciclo	; En este ciclo se recorre la memoria desde la primera direccion hasta la final llenandola del valor inicial 0xFF
-		
-		str		r2, [r0,r1]
-		add		r1,r1,#4
-		cmp		r1,r0
-		
-		bne		ciclo
-		
-		;		SE VA A CARGAR LA SIGUIENTE FRASE
-		;		EL CUADERNO AMARILLO
-		;		069 076 032 067 085 065 068 069 082 078 079 032 065 077 065 082 073 076 076 079
-		
-		mov		r2, #65
-		str		r2, [r0]
-		
-		mov		r2, #69
-		str		r2, [r0,#4]
-		
-		mov		r2, #73
-		str		r2, [r0,#8]
-
-		mov		r2, #82
-		str		r2, [r0,#12]
-		
-		mov		r2, #32
-		str		r2, [r0,#16]
-		
-		;mov		r2, #76
-		;str		r2, [r0,#4]
-		
-		;mov		r2, #32
-		;str		r2, [r0,#8]
-		
-		
-		
-		;mov		r2, #67
-		;str		r2, [r0,#12]
-		
-;		mov		r2, #85
-;		str		r2, [r0,#16]
-		
-		mov		r2, #65
-		str		r2, [r0,#20]
-		
-		mov		r2, #68
-		str		r2, [r0,#24]
-		
-		mov		r2, #69
-		str		r2, [r0,#28]
-		
-		mov		r2, #82
-		str		r2, [r0,#32]
-		
-		mov		r2, #78
-		str		r2, [r0,#36]
-		
-		mov		r2, #79
-		str		r2, [r0,#40]
-		
-		mov		r2, #32
-		str		r2, [r0,#44]
-		
-		mov		r2, #65
-		str		r2, [r0,#48]
-		
-		mov		r2, #77
-		str		r2, [r0,#52]
-		
-		mov		r2, #65
-		str		r2, [r0,#56]
-		
-		mov		r2, #82
-		str		r2, [r0,#60]
-		
-		mov		r2, #73
-		str		r2, [r0,#64]
-		
-		mov		r2, #76
-		str		r2, [r0,#68]
-		
-		mov		r2, #76
-		str		r2, [r0,#72]
-		
-		mov		r2, #79
-		str		r2, [r0,#76]
-		
-		;		-------------------------------- inicio ------------------------
-		;		asisgnacion inicial de los punteros
-		
-		mov		r0,#0x3E8   		; puntero contador
-		mov		r2,#0x3E8 		; puntero inicio de cada palabra
-		mov		r3,#0			; ctr vocales
-		
-		
-		;		recursion de contar vocales
-ciclo2
-		ldr		r1,[r0]
-		cmp		r1,#65		;A
-		beq		vocal
-		cmp		r1,#69		;E
-		beq		vocal
-		cmp		r1,#73		;I
-		beq		vocal
-		cmp		r1,#79		;O
-		beq		vocal
-		cmp		r1,#85		;U
-		beq		vocal
-		
-		add		r0,r0,#4
-		
-		cmp		r1,#32		; space
-		beq		space
-		b		ciclo2
-		
-vocal
-		add		r3,r3,#1
-		add		r0,r0,#4
-		cmp		r3,#3		; ctr = 3 vocales
-		beq		replace
-		b		ciclo2
-		
-		
-replace
-		end
-		
-		
-space
-		end
-		
+			
+			str		r2, [r0,r1]
+			add		r1,r1,#4
+			cmp		r1,r0
+			
+			bne		ciclo
+			
+			;		SE VA A CARGAR LA SIGUIENTE FRASE
+			;		EL CUADERNO aMaRiLLo
+			;		069 076 032 067 085 065 068 069 082 078 079 032 091 077 091 082 105 076 076 111
+			
+			mov		r2, #69
+			str		r2, [r0]
+			
+			mov		r2, #76
+			str		r2, [r0,#4]
+			
+			mov		r2, #32
+			str		r2, [r0,#8]
+			
+			mov		r2, #67
+			str		r2, [r0,#12]
+			
+			mov		r2, #85
+			str		r2, [r0,#16]
+			
+			mov		r2, #65
+			str		r2, [r0,#20]
+			
+			mov		r2, #68
+			str		r2, [r0,#24]
+			
+			mov		r2, #69
+			str		r2, [r0,#28]
+			
+			mov		r2, #82
+			str		r2, [r0,#32]
+			
+			mov		r2, #78
+			str		r2, [r0,#36]
+			
+			mov		r2, #79
+			str		r2, [r0,#40]
+			
+			mov		r2, #32
+			str		r2, [r0,#44]
+			
+			mov		r2, #65
+			str		r2, [r0,#48]
+			
+			mov		r2, #77
+			str		r2, [r0,#52]
+			
+			mov		r2, #65
+			str		r2, [r0,#56]
+			
+			mov		r2, #82
+			str		r2, [r0,#60]
+			
+			mov		r2, #73
+			str		r2, [r0,#64]
+			
+			mov		r2, #76
+			str		r2, [r0,#68]
+			
+			mov		r2, #76
+			str		r2, [r0,#72]
+			
+			mov		r2, #79
+			str		r2, [r0,#76]
+			
+			;		-------------------------------- inicio ------------------------
+			;		asisgnacion inicial de los punteros
+			
+			
+			
+			
+start
+			MOV		r0,#0x400   		; puntero contador
+			MOV		r2,#0x400 		; puntero inicio de cada palabra
+			MOV		r3,#0			; ctr vocales
+			MOV		r4,#36			; $
+			
+			
+			;		recursion de contar vocales
+find_cycle
+			;		guardar valor actual del puntero
+			LDR		r1,[r0]
+			
+			;		final
+			CMP		r1,#0xFF		;
+			BEQ		fin
+			
+			;		space
+			CMP		r1,#32
+			BEQ		space
+			
+			;		vocales
+			CMP		r1,#65		;A
+			BEQ		vowel
+			CMP		r1,#69		;E
+			BEQ		vowel
+			CMP		r1,#73		;I
+			BEQ		vowel
+			CMP		r1,#79		;O
+			BEQ		vowel
+			CMP		r1,#85		;U
+			BEQ		vowel
+			CMP		r1,#97		;a
+			BEQ		vowel
+			CMP		r1,#101		;e
+			BEQ		vowel
+			CMP		r1,#105		;i
+			BEQ		vowel
+			CMP		r1,#111		;o
+			BEQ		vowel
+			CMP		r1,#117		;u
+			BEQ		vowel
+			
+			;		incrementar puntero
+			ADD		r0,r0,#4
+			
+			;		repetir ciclo
+			B		find_cycle
+			
+vowel
+			;		incrementar contador de vocales
+			ADD		r3,r3,#1
+			
+			;		incrementar puntero
+			ADD		r0,r0,#4
+			
+			;		si se encuentran 3 vocales
+			CMP		r3,#3
+			BEQ		set_pointer
+			
+			;		seguir ciclo contar
+			B		find_cycle
+			
+			
+			
+			
+			
+set_pointer	; mover puntero al inicio de la palabra
+			MOV		r0,r2
+			
+replace_cycle
+			;		guardar valor actual del puntero
+			LDR		r1,[r0]
+			
+			;		final
+			CMP		r1,#0xFF		;
+			BEQ		fin
+			
+			;		space
+			CMP		r1,#32
+			BEQ		space
+			
+			;		vocales
+			CMP		r1,#65		;A
+			BEQ		replace
+			CMP		r1,#69		;E
+			BEQ		replace
+			CMP		r1,#73		;I
+			BEQ		replace
+			CMP		r1,#79		;O
+			BEQ		replace
+			CMP		r1,#85		;U
+			BEQ		replace
+			CMP		r1,#97		;a
+			BEQ		replace
+			CMP		r1,#101		;e
+			BEQ		replace
+			CMP		r1,#105		;i
+			BEQ		replace
+			CMP		r1,#111		;o
+			BEQ		replace
+			CMP		r1,#117		;u
+			BEQ		replace
+			
+			;		incrementar puntero
+			ADD		r0,r0,#4
+			
+			;		seguir ciclo reemplazo
+			B		replace_cycle
+			
+			
+replace		; asignar simbolo de dolar a la vocal
+			STR		r4, [r0]
+			
+			;		incrementar puntero
+			ADD		r0,r0,#4
+			
+			;		seguir ciclo reemplazo
+			B		replace_cycle
+			
+space		; incrementar puntero
+			ADD		r0,r0,#4
+			
+			;		nueva posiciones inicial de la palabra
+			MOV		r2,r0
+			
+			;		contador de vocales en 0
+			MOV		r3,#0
+			
+			;		seguir con la otra palabra
+			B		find_cycle
+			
+fin			END
