@@ -1,0 +1,133 @@
+		mov		r0, #0x3E8	; Direccion de memoria inicial, deberia ser 0
+		mov		r1, #0		; Contador para llenar la memoria de valores iniciales FF
+		mov		r2, #0xFF		; Valor inicial para los datos de la memoria
+		
+ciclo	; En este ciclo se recorre la memoria desde la primera direccion hasta la final llenandola del valor inicial 0xFF
+		
+		str		r2, [r0,r1]
+		add		r1,r1,#4
+		cmp		r1,r0
+		
+		bne		ciclo
+		
+		;		SE VA A CARGAR LA SIGUIENTE FRASE
+		;		EL CUADERNO AMARILLO
+		;		069 076 032 067 085 065 068 069 082 078 079 032 065 077 065 082 073 076 076 079
+		
+		mov		r2, #65
+		str		r2, [r0]
+		
+		mov		r2, #69
+		str		r2, [r0,#4]
+		
+		mov		r2, #73
+		str		r2, [r0,#8]
+
+		mov		r2, #82
+		str		r2, [r0,#12]
+		
+		mov		r2, #32
+		str		r2, [r0,#16]
+		
+		;mov		r2, #76
+		;str		r2, [r0,#4]
+		
+		;mov		r2, #32
+		;str		r2, [r0,#8]
+		
+		
+		
+		;mov		r2, #67
+		;str		r2, [r0,#12]
+		
+;		mov		r2, #85
+;		str		r2, [r0,#16]
+		
+		mov		r2, #65
+		str		r2, [r0,#20]
+		
+		mov		r2, #68
+		str		r2, [r0,#24]
+		
+		mov		r2, #69
+		str		r2, [r0,#28]
+		
+		mov		r2, #82
+		str		r2, [r0,#32]
+		
+		mov		r2, #78
+		str		r2, [r0,#36]
+		
+		mov		r2, #79
+		str		r2, [r0,#40]
+		
+		mov		r2, #32
+		str		r2, [r0,#44]
+		
+		mov		r2, #65
+		str		r2, [r0,#48]
+		
+		mov		r2, #77
+		str		r2, [r0,#52]
+		
+		mov		r2, #65
+		str		r2, [r0,#56]
+		
+		mov		r2, #82
+		str		r2, [r0,#60]
+		
+		mov		r2, #73
+		str		r2, [r0,#64]
+		
+		mov		r2, #76
+		str		r2, [r0,#68]
+		
+		mov		r2, #76
+		str		r2, [r0,#72]
+		
+		mov		r2, #79
+		str		r2, [r0,#76]
+		
+		;		-------------------------------- inicio ------------------------
+		;		asisgnacion inicial de los punteros
+		
+		mov		r0,#0x3E8   		; puntero contador
+		mov		r2,#0x3E8 		; puntero inicio de cada palabra
+		mov		r3,#0			; ctr vocales
+		
+		
+		;		recursion de contar vocales
+ciclo2
+		ldr		r1,[r0]
+		cmp		r1,#65		;A
+		beq		vocal
+		cmp		r1,#69		;E
+		beq		vocal
+		cmp		r1,#73		;I
+		beq		vocal
+		cmp		r1,#79		;O
+		beq		vocal
+		cmp		r1,#85		;U
+		beq		vocal
+		
+		add		r0,r0,#4
+		
+		cmp		r1,#32		; space
+		beq		space
+		b		ciclo2
+		
+vocal
+		add		r3,r3,#1
+		add		r0,r0,#4
+		cmp		r3,#3		; ctr = 3 vocales
+		beq		replace
+		b		ciclo2
+		
+		
+replace
+		end
+		
+		
+space
+		end
+		
