@@ -1,0 +1,5 @@
+-Consulta sobre el codigo en ARM y las memorias de datos:
+
+	¿El código que hicimos (creemos que) lee y escribe sobre los datos que están en una misma memoria, la memoria del simulador visUAL, pero escuchamos que en la clase dijo que eran 2 memorias además de la de instrucciones, una que tiene las frases que carga el usuario y otra donde se escribe la salida por asi decirlo.
+	Estamos pensandolo mal?
+	Tenemos la idea de que si son diferentes entonces meter un ciclo previo a lo que tenemos y escribir la frase completa en la memoria de escritura y luego aplicar el algoritmo, pero que nos recomieda
