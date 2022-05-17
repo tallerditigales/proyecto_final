@@ -1,12 +1,12 @@
 
 `timescale 1 ps / 1 ps
 
-module TestRom();
+module Test_InstructionsRom();
 
 	logic clk, rst;
-	logic [7:0] q;
+	logic [31:0] q;
 	
-	TopRom memoria (clk,rst,q);
+	Top_InstructionsRom memoria (clk,rst,q);
 	
 	initial begin
 	
