@@ -1,6 +1,8 @@
 
 `timescale 1 ps / 1 ps
 
+// vsim -L altera_mf_ver -L lpm_ver Test_InstructionsRom
+
 module Test_InstructionsRom();
 
 	logic clk, rst;
