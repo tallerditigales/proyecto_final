@@ -1,11 +1,15 @@
-module Top_InstructionsRom (input clk, input rst, output [31:0] q);
+module Top_InstructionsRom (input clk, input rst, output logic [31:0] q);
+	
+	logic [31:0] address; // 0
 
-	logic [7:0] address;
+	
 	
 	Instructions_Counter contador (clk,rst,1'b1,address);
 	
-	InstructionsROM memoria (address,clk,q);
+	InstructionROM memoria (address,q);
+	
+	// 1,2,3,4
 	
 
-
+	
 endmodule  
