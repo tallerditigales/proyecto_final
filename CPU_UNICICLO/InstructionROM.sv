@@ -4,7 +4,7 @@ module InstructionROM
 	output [31:0] dataOut
 );
 
-	logic [7:0] rom [1:0];
+	logic [7:0] rom [150:0];
 	logic [31:0] outAux;
 	
 	initial 
