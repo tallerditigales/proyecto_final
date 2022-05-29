@@ -14,12 +14,16 @@ module Test_InstructionsRom();
 	
 		rst=1; #10; rst=0;
 		clk=0; 
+		
 	
 	end
 	
 	always begin
 	
 		clk=~clk; #5;
+		if (~clk)
+			$displayh (q);
+		
 	
 	end
 	

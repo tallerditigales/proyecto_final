@@ -4,7 +4,7 @@ module InstructionROM
 	output [31:0] dataOut
 );
 
-	logic [7:0] rom [150:0];
+	logic [7:0] rom [288:0];
 	logic [31:0] outAux;
 	
 	initial 
@@ -12,7 +12,7 @@ module InstructionROM
 	
 	always @ (*)
 	begin 
-		outAux = {rom[pc+3], rom[pc+2], rom[pc+1], rom[pc]};
+		outAux = {rom[pc], rom[pc+1], rom[pc+2], rom[pc+3]};
 	end
 	
 	assign dataOut = outAux;
