@@ -5,25 +5,21 @@
 
 module Test_InstructionsRom();
 
-	logic clk, rst;
+	logic [31:0] pc;
 	logic [31:0] q;
 	
-	Top_InstructionsRom memoria (clk,rst,q);
+	InstructionROM memoria (pc,q);
 	
 	initial begin
 	
-		rst=1; #10; rst=0;
-		clk=0; 
-		
-	
+		pc=0;
+
 	end
 	
 	always begin
-	
-		clk=~clk; #5;
-		if (~clk)
-			$displayh (q);
-		
+		#5;
+		$displayh (q); 
+		pc=pc+4;
 	
 	end
 	
