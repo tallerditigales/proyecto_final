@@ -3,7 +3,7 @@ module Decode (
 	input rst,
 	input [31:0] instruction, 
 	output useMemory,		// use memory
-	output r_w,				// read = 0 /  write = 1
+	output regWrite,				// read = 0 /  write = 1
 	output [3:0] rd, 		// destination register
 	output [3:0] rn,		// source register
 	output [3:0] rm,		// other register
@@ -14,7 +14,7 @@ module Decode (
 					
 
 	logic _useMemory;
-	logic _r_w;
+	logic _regWrite;
 	logic [3:0] _rd;	
 	logic [3:0] _rn;
 	logic [3:0] _rm;
@@ -27,7 +27,7 @@ begin
 
 	if (!rst) begin
 		_useMemory = 0;
-		_r_w = 0;
+		_regWrite = 0;
 		_rd = 0;
 		_rn = 0;
 		_rm = 0;
@@ -42,7 +42,7 @@ begin
 			2'b00: begin
 			
 				_useMemory = 0;
-				_r_w = 0;
+				_regWrite = 1;
 				_funct = instruction[24:21];
 				_rn = instruction[19:16];
 				_rd = instruction[15:12];
@@ -62,7 +62,7 @@ begin
 			2'b01: begin
 					
 					// Load or Store
-					_r_w = (instruction[21]) ? 0 : 1;
+					_regWrite = (instruction[20]) ? 0 : 1;
 					
 					_useMemory = 1;
 					_funct = instruction[24:21];
@@ -81,7 +81,7 @@ begin
 		// Branch
 			2'b10: begin
 				_useMemory = 0;
-				_r_w = 0;
+				_regWrite = 0;
 				_funct = 0;
 				_rn = 0;
 				_rd = 0;
@@ -92,7 +92,7 @@ begin
 			
 			default: begin
 				_useMemory = 0;
-				_r_w = 0;
+				_regWrite = 0;
 				_funct = 0;
 				_rn = 0;
 				_rd = 0;
@@ -105,7 +105,7 @@ begin
 end
 
 	assign useMemory = _useMemory;
-	assign r_w = _r_w;	
+	assign regWrite = _regWrite;	
 	assign rd = _rd;
 	assign rn = _rn;
 	assign rm = _rm;
