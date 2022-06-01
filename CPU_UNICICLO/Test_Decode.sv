@@ -3,8 +3,8 @@ module Test_Decode();
 
 	logic clk, rst;
 	logic [31:0] instruction;
-	logic useMemory;
-	logic regWrite;
+	logic MEM;
+	logic REG_WR;
 	logic [3:0] rd;	
 	logic [3:0] rn;
 	logic [3:0] rm;
@@ -16,13 +16,13 @@ module Test_Decode();
 		.clk(clk),
 		.rst(rst),
 		.instruction(instruction),
-		.useMemory(useMemory),
-		.regWrite(regWrite),
 		.rd(rd),
 		.rn(rn),
 		.rm(rm),
 		.funct(funct),
-		.imm(imm)
+		.imm(imm),
+		.MEM(MEM),
+		.REG_WR(REG_WR)
 	);
 	
 	

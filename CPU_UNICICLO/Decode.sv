@@ -2,23 +2,27 @@ module Decode (
 	input clk,
 	input rst,
 	input [31:0] instruction, 
-	output useMemory,		// use memory
-	output regWrite,				// read = 0 /  write = 1
+
 	output [3:0] rd, 		// destination register
 	output [3:0] rn,		// source register
 	output [3:0] rm,		// other register
-	output [3:0] funct,	// function
-	output [23:0] imm		// immediate
+	output [3:0] cmd,		// cmd
+	output [23:0] imm,	// immediate
 	
+	
+	
+	// signals
+	output MEM,			// use memory
+	output REG_WR,		// read = 0 /  write = 1
+	output SEL_DEST
 );
 					
-
-	logic _useMemory;
-	logic _regWrite;
+	logic _MEM;
+	logic _REG_WR;
 	logic [3:0] _rd;	
 	logic [3:0] _rn;
 	logic [3:0] _rm;
-	logic [3:0] _funct;
+	logic [3:0] _cmd;
 	logic [23:0] _imm;
 	
 	
@@ -26,12 +30,12 @@ always_ff @(posedge clk or negedge rst)
 begin
 
 	if (!rst) begin
-		_useMemory = 0;
-		_regWrite = 0;
+		_MEM = 0;
+		_REG_WR = 0;
 		_rd = 0;
 		_rn = 0;
 		_rm = 0;
-		_funct = 0;
+		_cmd = 0;
 		_imm = 0;
 	end
 
@@ -41,9 +45,9 @@ begin
 		// Data-processing
 			2'b00: begin
 			
-				_useMemory = 0;
-				_regWrite = 1;
-				_funct = instruction[24:21];
+				_MEM = 0;
+				_REG_WR = 1;
+				_cmd = instruction[24:21];
 				_rn = instruction[19:16];
 				_rd = instruction[15:12];
 				
@@ -62,10 +66,10 @@ begin
 			2'b01: begin
 					
 					// Load or Store
-					_regWrite = (instruction[20]) ? 0 : 1;
+					_REG_WR = (instruction[20]) ? 0 : 1;
 					
-					_useMemory = 1;
-					_funct = instruction[24:21];
+					_MEM = 1;
+					_cmd = instruction[24:21];
 					_rn = instruction[19:16];
 					_rd = instruction[15:12];
 					
@@ -80,9 +84,9 @@ begin
 				
 		// Branch
 			2'b10: begin
-				_useMemory = 0;
-				_regWrite = 0;
-				_funct = 0;
+				_MEM = 0;
+				_REG_WR = 0;
+				_cmd = 0;
 				_rn = 0;
 				_rd = 0;
 				_rm = 0;
@@ -91,9 +95,9 @@ begin
 			
 			
 			default: begin
-				_useMemory = 0;
-				_regWrite = 0;
-				_funct = 0;
+				_MEM = 0;
+				_REG_WR = 0;
+				_cmd = 0;
 				_rn = 0;
 				_rd = 0;
 				_rm = 0;
@@ -104,12 +108,12 @@ begin
 	end
 end
 
-	assign useMemory = _useMemory;
-	assign regWrite = _regWrite;	
+	assign MEM = _MEM;
+	assign REG_WR = _REG_WR;	
 	assign rd = _rd;
 	assign rn = _rn;
 	assign rm = _rm;
-	assign funct = _funct;
+	assign cmd = _cmd;
 	assign imm = _imm;
 	
 endmodule
