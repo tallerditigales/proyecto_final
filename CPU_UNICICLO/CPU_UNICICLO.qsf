@@ -73,28 +73,6 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Test_ALU_Control -section
 set_global_assignment -name EDA_TEST_BENCH_NAME Test_RegisterFile -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Test_RegisterFile
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Test_RegisterFile -section_id Test_RegisterFile
-set_global_assignment -name SYSTEMVERILOG_FILE mux_4to1.sv
-set_global_assignment -name SYSTEMVERILOG_FILE mux_2to1.sv
-set_global_assignment -name QIP_FILE DataRAM.qip
-set_global_assignment -name MIF_FILE Memory_Data_Initialization.mif
-set_global_assignment -name SOURCE_FILE program.mem
-set_global_assignment -name SOURCE_FILE db/CPU_UNICICLO.cmp.rdb
-set_global_assignment -name SYSTEMVERILOG_FILE CPU_SINGLE_CYLCLE.sv
-set_global_assignment -name SYSTEMVERILOG_FILE InstructionROM.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Test_InstructionsRom.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Top_DataRam.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Test_DataRam.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Counter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Instructions_Counter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Decode.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Test_Decode.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ALU_Control.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Test_ALU_Control.sv
-set_global_assignment -name SYSTEMVERILOG_FILE split.sv
-set_global_assignment -name SYSTEMVERILOG_FILE RegisterFile.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Test_RegisterFile.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Control_Unit.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Test_Control_Unit.sv
 set_global_assignment -name EDA_TEST_BENCH_NAME Test_Control_Unit -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Test_Control_Unit
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Test_Control_Unit -section_id Test_Control_Unit
@@ -110,4 +88,25 @@ set_global_assignment -name EDA_TEST_BENCH_FILE Test_Control_Unit.sv -section_id
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE PC.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_4to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_2to1.sv
+set_global_assignment -name QIP_FILE DataRAM.qip
+set_global_assignment -name MIF_FILE Memory_Data_Initialization.mif
+set_global_assignment -name SOURCE_FILE program.mem
+set_global_assignment -name SYSTEMVERILOG_FILE CPU_SINGLE_CYLCLE.sv
+set_global_assignment -name SYSTEMVERILOG_FILE InstructionROM.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Test_InstructionsRom.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Top_DataRam.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Test_DataRam.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Decode.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Test_Decode.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ALU_Control.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Test_ALU_Control.sv
+set_global_assignment -name SYSTEMVERILOG_FILE split.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RegisterFile.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Test_RegisterFile.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Control_Unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Test_Control_Unit.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
