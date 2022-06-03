@@ -1,4 +1,4 @@
-module Instructions_Counter #(parameter N=32) (input clk, rst, en, output logic [31:0] q);
+module PC #(parameter N=32) (input clk, rst, en, output logic [31:0] q);
 
 	always_ff @ (posedge clk or posedge rst)
 		if (rst)

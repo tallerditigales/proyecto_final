@@ -44,6 +44,6 @@ module datapath
 	// ALU logic
 	mux2 #(32) srcbmux(WriteData, ExtImm, ALUSrc, SrcB);
 	
-	alu alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags);
+	alu #(32) alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags);
 	
 endmodule

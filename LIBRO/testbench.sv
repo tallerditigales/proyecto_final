@@ -3,9 +3,10 @@ module testbench();
 	logic reset;
 	logic [31:0] WriteData, DataAdr;
 	logic MemWrite;
+	logic [31:0] RAM[63:0];
 	
 	// instantiate device to be tested
-	top dut(clk, reset, WriteData, DataAdr, MemWrite);
+	top dut(clk, reset, WriteData, DataAdr, MemWrite, RAM);
 	
 	// initialize test
 	initial begin
@@ -16,8 +17,9 @@ module testbench();
 	always
 	begin
 		clk <= 1; # 5; clk <= 0; # 5;
-	end// check that 7 gets written to address 0x64
-		
+	end
+	
+	// check that 7 gets written to address 0x64	
 	// at end of program
 	always @(negedge clk)
 	begin
