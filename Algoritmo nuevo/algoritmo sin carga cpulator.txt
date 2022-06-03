@@ -1,8 +1,13 @@
+.global _start
+_start:
+	
 start:
-			MOV		r1,#0x400   	
-			MOV		r3,#0x400 		
-			MOV		r4,#0			
-			MOV		r5,#36			
+			SUB 	R0, R15, R15
+			add		r1,r0,#0 
+			add		r3,r0,#0
+			add		r4,r0,#0
+			add		r5,r0,#36	
+			
 			
 			
 			
@@ -11,33 +16,52 @@ find_cycle:
 			LDR		r2,[r1]
 			
 			
-			CMP		r2,#0xFF	
+			subs	r10,r2,#0xFF
+			//CMP		r2,#0xFF	
 			BEQ		fin
 			
-			
-			CMP		r2,#32
+			subs	r10,r2,#32
+			//CMP		r2,#32
 			BEQ		space
 			
+			subs	r10,r2,#65	
+			//CMP		r2,#65		
+			BEQ		vowel
 			
-			CMP		r2,#65		
+			subs	r10,r2,#69	
+			//CMP		r2,#69		
 			BEQ		vowel
-			CMP		r2,#69		
+			
+			subs	r10,r2,#73	
+			//CMP		r2,#73		
 			BEQ		vowel
-			CMP		r2,#73		
+			
+			subs	r10,r2,#79	
+			//CMP		r2,#79		
 			BEQ		vowel
-			CMP		r2,#79		
+			
+			subs	r10,r2,#85	
+			//CMP		r2,#85		
 			BEQ		vowel
-			CMP		r2,#85		
+			
+			subs	r10,r2,#97
+			//CMP		r2,#97		
 			BEQ		vowel
-			CMP		r2,#97		
+			
+			subs	r10,r2,#101	
+			//CMP		r2,#101		
 			BEQ		vowel
-			CMP		r2,#101		
+			
+			subs	r10,r2,#105	
+			//CMP		r2,#105		
 			BEQ		vowel
-			CMP		r2,#105		
+			
+			subs	r10,r2,#111	
+			//CMP		r2,#111		
 			BEQ		vowel
-			CMP		r2,#111		
-			BEQ		vowel
-			CMP		r2,#117		
+			
+			subs	r10,r2,#117	
+			//CMP		r2,#117		
 			BEQ		vowel
 			
 			
@@ -53,8 +77,8 @@ vowel:
 			
 			ADD		r1,r1,#4
 			
-			
-			CMP		r4,#3
+			subs	r10,r4,#3	
+			//CMP		r4,#3
 			BEQ		set_pointer
 			
 			
@@ -64,41 +88,60 @@ vowel:
 			
 			
 			
-set_pointer:	
-			MOV		r1,r3
+set_pointer:
+			add		r1,r0,r3
+			//MOV		r1,r3
 			
 replace_cycle:
 			
 			LDR		r2,[r1]
 			
-			
-			CMP		r2,#0xFF		
+			subs	r10,r2,#0xFF	
+			//CMP		r2,#0xFF		
 			BEQ		fin
 			
-			
-			CMP		r2,#32
+			subs	r10,r2,#32	
+			//CMP		r2,#32
 			BEQ		space
 			
+			subs	r10,r2,#65	
+			//CMP		r2,#65		
+			BEQ		replace
 			
-			CMP		r2,#65		
+			subs	r10,r2,#69	
+			//CMP		r2,#69		
 			BEQ		replace
-			CMP		r2,#69		
+			
+			subs	r10,r2,#73	
+			//CMP		r2,#73		
 			BEQ		replace
-			CMP		r2,#73		
+			
+			subs	r10,r2,#79	
+			//CMP		r2,#79		
 			BEQ		replace
-			CMP		r2,#79		
+			
+			subs	r10,r2,#85	
+			//CMP		r2,#85		
 			BEQ		replace
-			CMP		r2,#85		
+			
+			subs	r10,r2,#97	
+			//CMP		r2,#97		
 			BEQ		replace
-			CMP		r2,#97		
+			
+			subs	r10,r2,#101	
+			//CMP		r2,#101		
 			BEQ		replace
-			CMP		r2,#101		
+			
+			subs	r10,r2,#105	
+			//CMP		r2,#105		
 			BEQ		replace
-			CMP		r2,#105		
+			
+			subs	r10,r2,#111	
+			//CMP		r2,#111		
 			BEQ		replace
-			CMP		r2,#111		
-			BEQ		replace
-			CMP		r2,#117		
+			
+			subs	r10,r2,#117	
+			//CMP		r2,#117		
 			BEQ		replace
 			
 			
@@ -121,12 +164,18 @@ space:
 			ADD		r1,r1,#4
 			
 			
-			MOV		r3,r1
+			add		r3,r0,r1
+			//MOV		r3,r1
 			
-			
-			MOV		r4,#0
+			add		r4,r0,#0
+			//MOV		r4,#0
 			
 			
 			B		find_cycle
 			
-fin:
+fin:		
+			add r11, r0, #1
+			STR r11, [R0, #200]
+
+
+			
