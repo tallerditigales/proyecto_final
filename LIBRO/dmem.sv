@@ -12,7 +12,7 @@ module dmem
 	assign rd = RAM[a[31:2]]; // word aligned
 	
 	initial
-		$readmemh("datamem.dat",RAM);
+		$readmemh("datamem2.dat",RAM);
 	
 	always_ff @(posedge clk)
 		if (we) RAM[a[31:2]] <= wd;

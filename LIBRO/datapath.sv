@@ -12,7 +12,10 @@ module datapath
 	output logic [31:0] PC,
 	input logic [31:0] Instr,
 	output logic [31:0] ALUResult, WriteData,
-	input logic [31:0] ReadData
+	input logic [31:0] ReadData,
+	
+	//-----------------------
+	output [31:0] registers[14:0]
 );
 
 	logic [31:0] PCNext, PCPlus4, PCPlus8;
@@ -35,7 +38,7 @@ module datapath
 	
 	regfile rf(clk, RegWrite, RA1, RA2,
 					Instr[15:12], Result, PCPlus8,
-					SrcA, WriteData);
+					SrcA, WriteData,registers);
 					
 	mux2 #(32) resmux(ALUResult, ReadData, MemtoReg, Result);
 	
