@@ -3,7 +3,7 @@ module arm // Controller and Datapath
 	input logic clk, reset,
 	output logic [31:0] PC,
 	input logic [31:0] Instr,
-	output logic MemWrite,
+	output logic MemWrite, ByteMem,
 	output logic [31:0] ALUResult, WriteData,
 	input logic [31:0] ReadData,
 	output [31:0] registers[14:0]
@@ -16,7 +16,7 @@ module arm // Controller and Datapath
 	controller c(clk, reset, Instr[31:12], ALUFlags,
 					RegSrc, RegWrite, ImmSrc,
 					ALUSrc, ALUControl,
-					MemWrite, MemtoReg, PCSrc);
+					MemWrite, MemtoReg, ByteMem, PCSrc);
 					
 	datapath dp(clk, reset,
 					RegSrc, RegWrite, ImmSrc,
