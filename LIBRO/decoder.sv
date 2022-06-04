@@ -16,25 +16,21 @@ module decoder
 	always_comb
 		casex(Op)
 										
-			2'b00: if (Funct[5]) 				controls = 11'b00001010010; // Data-processing immediate
+			2'b00: 
+			
+			if (Funct[4:1] == 4'b1010 & Funct[5]) 			controls = 11'b00001010010; // Compare immediate
+			else if (Funct[4:1] == 4'b1010 & !Funct[5]) 	controls = 11'b00000010010; // Compare register
+			else if (Funct[5]) 									controls = 11'b00001010010; // Data-processing immediate			
+			else 														controls = 11'b00000010010; // Data-processing register 
+				
+			2'b01: if (Funct[0] & !Funct[2])					controls = 11'b00011110000; // LDR
+			else if (Funct[0] & Funct[2])						controls = 11'b00011110001; // LDRB																    				
+			else if (!Funct[0] & !Funct[2]) 					controls = 11'b10011101000; // STR
+			else  								 					controls = 11'b10011101001; // STRB
 										
-			else 										controls = 11'b00000010010; // Data-processing register 
-
+			2'b10: 													controls = 11'b01101000100;	// Be
 										
-			2'b01: if (Funct[0] & !Funct[2])	controls = 11'b00011110000; // LDR
-			
-			else if (Funct[0] & Funct[2])		controls = 11'b00011110001; // LDRB
-																						    				
-			else if (!Funct[0] & !Funct[2]) 	controls = 11'b10011101000; // STR
-			
-			else  								 	controls = 11'b10011101001; // STRB
-			
-			
-			
-										
-			2'b10: 									controls = 11'b01101000100;	// Be
-										
-			default: 								controls = 11'bx; 		   // Unimplemented
+			default: 												controls = 11'bx; 		   // Unimplemented
 			
 		endcase
 	
@@ -92,6 +88,7 @@ module decoder
 				4'b0010: ALUControl = 2'b01; // SUB
 				4'b0000: ALUControl = 2'b10; // AND
 				4'b1100: ALUControl = 2'b11; // ORR
+				4'b1010: ALUControl = 2'b01; // COMPARE
 				default: ALUControl = 2'bx; // unimplemented
 			endcase
 			
