@@ -24,12 +24,51 @@ module decoder
 										// STR												    // PARA AGREGAR EL STORE BYTE
 			else 						controls = 10'b1001110100;  //op = 01, L=0
 										// B
-			2'b10: 					controls = 10'b0110100010;
+			2'b10: 					controls = 10'b0110100010;	
 										// Unimplemented
 			default: 				controls = 10'bx;
 			
 		endcase
+	
+	// Señales
+	
+	// RegSrc: señal de seleccion de los dos mux que entran al banco de registros.
+					// El LSB (ra1mux): selecciona entre RN y "15" (pc)
+					// El MSB (ra2mux): selecciona entre RM y RD
+					
+	//	ImmSrc: señal del extensor:
+					// 00: 8-bit unsigned immediate
+					// 01: 12-bit unsigned immediate
+					// 10. 24-bit two's complement shifted branch
+					
+	// ALUSrc: señal de seleccion de la entrada B del ALU.
+					// 0: selecciona el registro RD2.
+				   // 1: selecciona el immediato exentedido.
+	
+	// MemtoReg: señal del mux que selecciona entre el resultado de la ALU o el dato leido de mem.
+					// 0: ALURESULT
+					// 1: ReadData (mem)
+	
+	// RegW: enable para escribir en el banco de registros
+	
+	// MemW: enable para escribir en la memoria
+	
+	// Branch: bandera del branch, se utiliza para definir el PCSrc (al final esta el assign)
+	
+	// ALUOp: bandera para indicar  si se necesita la ALU, con esta se define el valor de
+	// ALUControl, abajo esta el decoder.
+	
 		
+	// Data-processing immediate
+	//			00			00			1			0	  	  1	  0	  0		1
+	// Data-processing register
+	// 		00			00			0			0		  1	  0	  0		1
+	// LDR
+	//			00			01			1			1		  1	  0	  0		0
+	// STR
+	// 		10			01			1			1		  0	  1	  0		0
+	// B
+	// 		01			10			1			0		  0	  0	  1		0
 	assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp} = controls;
 	
 	// ALU Decoder
