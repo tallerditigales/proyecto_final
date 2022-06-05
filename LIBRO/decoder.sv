@@ -25,9 +25,9 @@ module decoder
 			else if (!Funct[0] & !Funct[2]) 					controls = 11'b10011101000; // STR
 			else  								 					controls = 11'b10011101001; // STRB
 										
-			2'b10: 													controls = 11'b01101000100;	// Be
+			2'b10: 													controls = 11'b01101000100; // Be
 										
-			default: 												controls = 11'bx; 		   // Unimplemented
+			default: 												controls = 11'bx; 		    // Unimplemented
 			
 		endcase
 	

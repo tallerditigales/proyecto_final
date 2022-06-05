@@ -1,0 +1,36 @@
+.global _start
+_start:
+	
+	SUB 	R0, R15, R15
+	mov		r1,#0 
+	mov 	r9,#5
+	mov		r3,#0
+	mov		r4,#0
+	mov		r5,#36	
+	mov		r12,r9
+	
+	cmp		r0,r0
+	beq		fin
+	
+
+prueba:
+	
+	mov r12, #55
+	mov r6, #55
+	mov r7, #55
+	mov r8, #55
+	
+fin:
+	mov r11, #65
+	STRB r11, [R0, #100]
+	mov r11, #66
+	STRB r11, [R0, #101]
+	mov r11, #67
+	STRB r11, [R0, #102]
+	mov r11, #68
+	STRB r11, [R0, #103]
+	
+	LDR r6, [r0, #100]
+	LDRB r7, [r0, #100]
+	
+	str	r9, [r0,#200]

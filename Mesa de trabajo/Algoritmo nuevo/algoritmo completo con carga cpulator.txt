@@ -77,10 +77,10 @@ ciclo:
 			
 start:
 			SUB 	R0, R15, R15
-			add		r1,r0,#0x400   
-			add		r3,r0,#0x400
-			add		r4,r0,#0
-			add		r5,r0,#36		
+			mov		r1,#0x400   
+			mov		r3,#0x400
+			mov		r4,#0
+			mov		r5,#36		
 			
 find_cycle:
 			
