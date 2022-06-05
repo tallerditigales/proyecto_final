@@ -6,7 +6,8 @@ module decoder
 	output logic [1:0] FlagW,
 	output logic PCS, RegW, MemW, ByteMem,  // Se agrega la bandera ByteMem para diferenciar ldrb y strb
 	output logic MemtoReg, ALUSrc,
-	output logic [1:0] ImmSrc, RegSrc, ALUControl
+	output logic [1:0] ImmSrc, RegSrc, 
+	output logic [2:0] ALUControl
 );
 
 	logic [10:0] controls;
@@ -16,11 +17,7 @@ module decoder
 	always_comb
 		casex(Op)
 										
-			2'b00: 
-			
-			if (Funct[4:1] == 4'b1010 & Funct[5]) 			controls = 11'b00001010010; // Compare immediate
-			else if (Funct[4:1] == 4'b1010 & !Funct[5]) 	controls = 11'b00000010010; // Compare register
-			else if (Funct[5]) 									controls = 11'b00001010010; // Data-processing immediate			
+			2'b00: if (Funct[5]) 								controls = 11'b00001010010; // Data-processing immediate			
 			else 														controls = 11'b00000010010; // Data-processing register 
 				
 			2'b01: if (Funct[0] & !Funct[2])					controls = 11'b00011110000; // LDR
@@ -84,20 +81,21 @@ module decoder
 	
 		if (ALUOp) begin // which DP Instr?
 			case(Funct[4:1])
-				4'b0100: ALUControl = 2'b00; // ADD
-				4'b0010: ALUControl = 2'b01; // SUB
-				4'b0000: ALUControl = 2'b10; // AND
-				4'b1100: ALUControl = 2'b11; // ORR
-				4'b1010: ALUControl = 2'b01; // COMPARE
-				default: ALUControl = 2'bx; // unimplemented
+				4'b0100: ALUControl = 3'b000; // ADD
+				4'b0010: ALUControl = 3'b001; // SUB
+				4'b0000: ALUControl = 3'b010; // AND
+				4'b1100: ALUControl = 3'b011; // ORR
+				4'b1010: ALUControl = 3'b001; // COMPARE
+				4'b1101: ALUControl = 3'b100; // MOV
+				default: ALUControl = 3'bx; // unimplemented
 			endcase
 			
 		// update flags if S bit is set (C & V only for arith)
 		FlagW[1] = Funct[0];
-		FlagW[0] = Funct[0] & (ALUControl == 2'b00 | ALUControl == 2'b01);
+		FlagW[0] = Funct[0] & (ALUControl == 3'b000 | ALUControl == 3'b001);
 		
 		end else begin
-			ALUControl 	= 2'b00; 	// add for non-DP instructions
+			ALUControl 	= 3'b000; 	// add for non-DP instructions
 			FlagW 		= 2'b00; 		// don't update Flags
 		end
 		

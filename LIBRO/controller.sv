@@ -7,7 +7,7 @@ module controller
 	output logic RegWrite,
 	output logic [1:0] ImmSrc,
 	output logic ALUSrc,
-	output logic [1:0] ALUControl,
+	output logic [2:0] ALUControl,
 	output logic MemWrite, MemtoReg, ByteMem, // ByteMem flag for ldrb, strb
 	output logic PCSrc
 );

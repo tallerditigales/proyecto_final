@@ -32,6 +32,7 @@ module alu
 		case (opcode_i)
 			AND_: result_o = a_i & b_i;
 			OR_: result_o = a_i | b_i;
+			MOV_: result_o = a_i;
 			default: result_o = arith_result_w;
 		endcase
 	end
