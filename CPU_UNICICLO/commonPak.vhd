@@ -14,10 +14,8 @@ use IEEE.STD_LOGIC_1164.all;
 use ieee.math_real.all;
 
 package commonPak is
-
-	constant TEXT_LENGHT : integer := 4;
 	
-	type chars is array (0 to TEXT_LENGHT-1) of integer range 0 to 127;
+	type chars is array (natural range <>) of integer range 0 to 127;
 	
 	constant ADDR_WIDTH : integer := 11;
 	constant DATA_WIDTH : integer := 8;

@@ -28,11 +28,8 @@ use work.commonPak.all;
 
 entity Pixel_On_Text2 is
 	port (
-		tex: in chars;
+		tex: in chars(0 to 2400);
 		clk: in std_logic;
-		-- top left corner of the text
-		positionX: in integer;
-		positionY: in integer;
 		-- current pixel postion
 		horzCoord: in integer;
 		vertCoord: in integer;
@@ -51,11 +48,12 @@ architecture Behavioral of Pixel_On_Text2 is
 	signal charPosition:integer := 0;
 	-- the bit position(column) in a charactor
 	signal bitPosition:integer := 0;
+	
 begin
     -- (horzCoord - position.x): x positionin the top left of the whole text
-    charPosition <= (horzCoord - positionX)/FONT_WIDTH + 1;
-    bitPosition <= (horzCoord - positionX) mod FONT_WIDTH;
-    fontAddress <= tex(charPosition-1)*16+(vertCoord - positionY);
+    charPosition <= (horzCoord)/FONT_WIDTH + (vertCoord/FONT_HEIGHT) * 80;
+    bitPosition <= (horzCoord) mod FONT_WIDTH;
+	 fontAddress <= tex(charPosition+1)*16+(vertCoord mod FONT_HEIGHT);
 
 
 	FontRom: entity work.Font_Rom
@@ -66,31 +64,13 @@ begin
 	);
 	
 	pixelOn: process(clk)
-		variable inXRange: boolean := false;
-		variable inYRange: boolean := false;
 	begin
         if rising_edge(clk) then
-            -- reset
-            inXRange := false;
-            inYRange := false;
             pixel <= '0';
-            -- If current pixel is in the horizontal range of text
-            if horzCoord >= positionX and horzCoord < positionX + (FONT_WIDTH * tex'length) then
-                inXRange := true;
-            end if;
-            
-            -- If current pixel is in the vertical range of text
-            if vertCoord >= positionY and vertCoord < positionY + FONT_HEIGHT then
-                inYRange := true;
-            end if;
-            
-            -- need to check if the pixel is on for text
-            if inXRange and inYRange then
-                -- FONT_WIDTH-bitPosition: we are reverting the charactor
-                if charBitInRow(FONT_WIDTH-bitPosition) = '1' then
+				
+				if charBitInRow(FONT_WIDTH-bitPosition) = '1' then
                     pixel <= '1';
-                end if;					
-            end if;
+				end if;
         
         end if;
 	end process;

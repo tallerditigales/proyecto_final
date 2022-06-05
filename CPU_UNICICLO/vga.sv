@@ -1,5 +1,5 @@
 package constants;
-	parameter BLUE = 24'h00FF70;
+	parameter BLUE = 24'h0096FF;
 	parameter WHITE = 24'hFFFFFF;
 	parameter ORANGE = 24'hFD8000;
 	parameter YELLOW = 24'hD1F523;
@@ -44,8 +44,6 @@ module vga(
 	
 	Pixel_On_Text2 t1(
                 .clk(clk_25),
-                .positionX(300), // text position.x (top left)
-                .positionY(200), // text position.y (top left)
                 .horzCoord(CounterX), // current position.x
                 .vertCoord(CounterY), // current position.y
                 .pixel(res),  // result, 1 if current pixel is on text, 0 otherwise
