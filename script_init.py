@@ -12,22 +12,25 @@ def printFiles():
     files = os.listdir(cwd)  # Get all the files in that directory
     print("Files in %r: \n%s" % (cwd, files))
 
+
 ## READ
 def read():
     f = open(completeName, "r") #open and read the file after the appending:
     print(f.read())
     f.close()
     
+    
 ## WRITE
-def write():
+def write(line):
     f = open(completeName, "w")
-    f.write(script())
+    f.write(line)
     f.close()
     
+    
 ## WRITELINES
-def writelines():
+def writelines(lines):
     f = open(completeName, "w")
-    f.writelines(script())
+    f.writelines(lines)
     f.close()
     
     
@@ -35,52 +38,48 @@ def writelines():
 def ascii(s):
     return format(ord(str(s)), "X")
 
+
+## PROCESS STRING
+def processString(s):
+    n = 4
+    arr = [s[i:i+n][::-1] for i in range(0, len(s), n)]
+    print(arr)
+    return arr
+    
+    
+## PROCESS ASCII
+def processASCII(arr):
+    lines = []
+    for i in range(0, len(arr)):
+        # for k in range(0, len(arr[i])):
+        a = list(map(lambda k:ascii(arr[i][k]), range(0, len(arr[i]))))
+
+        if (len(a) == 4):
+            a.append('\n')
+            if (i == len(arr)-1):
+                a.append('FF')
+            lines.append(''.join(a))
+            
+        else:
+            a.append('FF')
+            lines.append((''.join(a)))
+    # print('\n',lines)
+    return lines
+ 
  
 ## SCRIPT
 def script():
     global s
-    # s = s[::-1]
-    print(s+'\n')
-    
-    n = 4
-    line = ''
-    for k in range(0, len(s)):
-        if (k == 0 or k%n != 0):
-            # line += s[k]
-            line += ascii(s[k])
-            
-        elif (k%n == 0):
-            # line += '\n' + s[k]
-            line += '\n' + ascii(s[k])
-    print(line)
-    return line
-    
-    
-    # line = ""
-    
-    # for k in range(0, len(s)):
+    return processASCII(processString(s))
 
-    #     if (k == 0):
-    #         tmp = s[k]
-    #         # tmp = ascii(s[k])
-    
-    #     elif (k%4 == 0):
-    #         # line += tmp[::-1]
-    #         line += tmp
-    #         tmp = '\n' + s[k]
-    #         # tmp += '\n' + ascii(s[k])  
-              
-    #     else:
-    #         tmp += s[k]
-    #         if (k == len(s)-1):
-                
-    # print(line)
     
 ## INPUT
 def submit():
     global s
     # s = input("Enter phrase: ")
-    s = "El cuaderno rosado"
-    writelines()
+    s = "El cuaderno rosa con stickers de Leonardo D Carpio Green"
+    print('✅ phrase: '+ s +'\n')
+    writelines(script())
+    
     
 submit()
