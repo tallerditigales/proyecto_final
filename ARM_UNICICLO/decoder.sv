@@ -18,14 +18,17 @@ module decoder
 		casex(Op)
 										
 			2'b00: if (Funct[5]) 								controls = 10'b0000101001; // Data-processing immediate			
-			else 														controls = 10'b0000001001; // Data-processing register 
+			else if (Funct[4:1] == 4'b1010)
+																controls = 10'b0000000001; // No Register write for compare
+			else
+																controls = 10'b0000001001; // Data-processing register 
 				
-			2'b01: if (Funct[0])									controls = 10'b0001111000; // LDR														    				
-			else 					 									controls = 10'b1001110100; // STR
+			2'b01: if (Funct[0])								controls = 10'b0001111000; // LDR														    				
+			else 					 							controls = 10'b1001110100; // STR
 										
-			2'b10: 													controls = 10'b0110100010; // Be
+			2'b10: 												controls = 10'b0110100010; // Be
 										
-			default: 												controls = 10'bx; 		    // Unimplemented
+			default: 											controls = 10'bx; 		    // Unimplemented
 			
 		endcase
 	
