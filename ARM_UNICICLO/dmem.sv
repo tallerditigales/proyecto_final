@@ -8,7 +8,7 @@ module dmem
 	//initial
 	//	$readmemh("datamem2.dat",RAM);
 	
-	logic [7:0] RAM[63:0];
+	logic [7:0] RAM[127:0];
 	assign rd = RAM[a[31:2]]; // word aligned
 	
 	always_ff @(posedge clk)
