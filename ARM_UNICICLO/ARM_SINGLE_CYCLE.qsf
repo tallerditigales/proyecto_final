@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
-set_global_assignment -name TOP_LEVEL_ENTITY chipset
+set_global_assignment -name TOP_LEVEL_ENTITY top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 21.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:37:38  JUNE 02, 2022"
 set_global_assignment -name LAST_QUARTUS_VERSION "21.1.0 Lite Edition"
@@ -76,7 +76,7 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name SYSTEMVERILOG_FILE test_alu.sv
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH test_chipset -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH test_top -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME TESTBENCH_ALU -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id TESTBENCH_ALU
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME TESTBENCH_ALU -section_id TESTBENCH_ALU
@@ -85,16 +85,16 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test_top
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test_top -section_id test_top
 set_global_assignment -name SYSTEMVERILOG_FILE flopenr.sv
 set_global_assignment -name SYSTEMVERILOG_FILE chipset.sv
+set_global_assignment -name SYSTEMVERILOG_FILE testbench_chipset.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME test_chipset -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test_chipset
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test_chipset -section_id test_chipset
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name SYSTEMVERILOG_FILE testbench_chipset.sv
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name EDA_TEST_BENCH_FILE test_alu.sv -section_id TESTBENCH_ALU
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id test_top
 set_global_assignment -name EDA_TEST_BENCH_FILE inst_mem_init.dat -section_id test_top
 set_global_assignment -name EDA_TEST_BENCH_FILE data_mem_init.dat -section_id test_top
-set_global_assignment -name EDA_TEST_BENCH_NAME test_chipset -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test_chipset
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test_chipset -section_id test_chipset
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench_chipset.sv -section_id test_chipset
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
