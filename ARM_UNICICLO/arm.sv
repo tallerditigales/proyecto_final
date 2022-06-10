@@ -5,8 +5,7 @@ module arm // Controller and Datapath
 	input logic [31:0] Instr,
 	output logic MemWrite, ByteMem,
 	output logic [31:0] ALUResult, WriteData,
-	input logic [31:0] ReadData,
-	output [31:0] registers[14:0]
+	input logic [31:0] ReadData
 );
 
 	logic [3:0] ALUFlags;
@@ -24,6 +23,6 @@ module arm // Controller and Datapath
 					ALUSrc, ALUControl,
 					MemtoReg, PCSrc,
 					ALUFlags, PC, Instr,
-					ALUResult, WriteData, ReadData, registers);
+					ALUResult, WriteData, ReadData);
 	
 endmodule

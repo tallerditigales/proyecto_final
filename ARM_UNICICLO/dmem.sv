@@ -2,14 +2,13 @@ module dmem
 (
 	input logic clk, we, be,
 	input logic [31:0] a, wd,
-	output logic [31:0] rd,
-	output [31:0] RAM_[63:0]
+	output logic [31:0] rd
 );
 	logic [31:0] RAM[63:0];
 	logic [31:0] Data_readed;
 	
 	
-	assign RAM_ = RAM;
+
 	assign rd = Data_readed; // word aligned
 	
 	initial
