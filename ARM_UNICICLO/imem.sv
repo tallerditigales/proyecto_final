@@ -7,7 +7,7 @@ module imem
 	logic [31:0] RAM[256:0];
 	
 	initial
-		$readmemh("memfile2.dat",RAM);
+		$readmemh("inst_mem_init.dat",RAM);
 	
 	assign rd = RAM[a[31:2]]; // word aligned
 	
