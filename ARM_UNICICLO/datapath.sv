@@ -33,9 +33,7 @@ module datapath
 	
 	mux2 #(4) ra2mux(Instr[3:0], Instr[15:12], RegSrc[1], RA2);
 	
-	regfile rf(clk, RegWrite, RA1, RA2,
-					Instr[15:12], Result, PCPlus8,
-					SrcA, WriteData);
+	regfile rf(clk, RegWrite, RA1, RA2, Instr[15:12], Result, PCPlus8,SrcA, WriteData);
 					
 	mux2 #(32) resmux(ALUResult, ReadData, MemtoReg, Result);
 	
