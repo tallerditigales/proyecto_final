@@ -1,6 +1,6 @@
 module datapath
 (
-	input logic clk, reset,
+	input logic clk, reset, start,
 	input logic [1:0] RegSrc,
 	input logic RegWrite,
 	input logic [1:0] ImmSrc,
@@ -25,7 +25,7 @@ module datapath
 	// next PC logic
 	mux2 #(32) pcmux(PCPlus4, Result, PCSrc, PCNext);
 	
-	flopr #(32) pcreg(clk, reset, PCNext, PC);
+	flopr #(32) pcreg(clk, reset, start, PCNext, PC);
 	
 	adder #(32) pcadd1(PC, 32'b100, PCPlus4);
 	

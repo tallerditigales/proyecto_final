@@ -1,6 +1,7 @@
 module testbench();
 	logic clk;
 	logic reset;
+	logic start;
 	logic [31:0] WriteData, DataAdr;
 	logic MemWrite;
 	logic [31:0] RAM[63:0];
@@ -8,11 +9,12 @@ module testbench();
 	logic ByteMem;	
 	
 	// instantiate device to be tested
-	top dut(clk, reset, WriteData, DataAdr, MemWrite, ByteMem, RAM,registers);
+	top dut(clk, reset, start, WriteData, DataAdr, MemWrite, ByteMem, RAM,registers);
 	
 	// initialize test
 	initial begin
 		reset <= 1; # 22; reset <= 0;
+		start <= 0; # 5000; start <= 1;
 	end
 	
 	// generate clock to sequence tests
