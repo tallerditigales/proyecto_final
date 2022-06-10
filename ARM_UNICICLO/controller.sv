@@ -8,7 +8,7 @@ module controller
 	output logic [1:0] ImmSrc,
 	output logic ALUSrc,
 	output logic [2:0] ALUControl,
-	output logic MemWrite, MemtoReg, ByteMem, // ByteMem flag for ldrb, strb
+	output logic MemWrite, MemtoReg,
 	output logic PCSrc
 );
 
@@ -16,7 +16,7 @@ module controller
 	logic PCS, RegW, MemW;
 	
 	decoder dec(Instr[27:26], Instr[25:20], Instr[15:12],
-					FlagW, PCS, RegW, MemW, ByteMem,
+					FlagW, PCS, RegW, MemW,
 					MemtoReg, ALUSrc, ImmSrc, 
 					RegSrc, ALUControl);
 	
