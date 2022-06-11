@@ -8,15 +8,22 @@ module controller
 	output logic [1:0] ImmSrc,
 	output logic ALUSrc,
 	output logic [2:0] ALUControl,
-	output logic MemWrite, MemtoReg, ByteMem, // ByteMem flag for ldrb, strb
+	output logic MemWrite, MemtoReg,
 	output logic PCSrc
 );
 
 	logic [1:0] FlagW;
 	logic PCS, RegW, MemW;
 	
+	// MEMORY	
+	// 								   	 FUNCT																	 11:0
+	//	31:28	  27:26	  	-------------25:20-------------	 19:16  	 15:12   	  11:0	 ->	imm12 
+	//	cond		op			I		P		U		B		W		L		Rn			Rd				Src	 		
+	//																												 ->	shamt5|sh| 1 |Rm
+	//																														 11:7	 6:5 4  3:0
+	
 	decoder dec(Instr[27:26], Instr[25:20], Instr[15:12],
-					FlagW, PCS, RegW, MemW, ByteMem,
+					FlagW, PCS, RegW, MemW,
 					MemtoReg, ALUSrc, ImmSrc, 
 					RegSrc, ALUControl);
 	
