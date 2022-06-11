@@ -63,10 +63,29 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id TESTBENCH_AL
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME TESTBENCH_ALU -section_id TESTBENCH_ALU
 set_global_assignment -name EDA_TEST_BENCH_NAME test_top -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test_top
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test_top -section_id test_top
 set_global_assignment -name EDA_TEST_BENCH_NAME test_chipset -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test_chipset
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test_chipset -section_id test_chipset
+set_global_assignment -name EDA_TEST_BENCH_NAME testbench_dmem -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench_dmem
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench_dmem -section_id testbench_dmem
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench -section_id test_top
+set_global_assignment -name EDA_TEST_BENCH_FILE test_alu.sv -section_id TESTBENCH_ALU
+set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id test_top
+set_global_assignment -name EDA_TEST_BENCH_FILE inst_mem_init.dat -section_id test_top
+set_global_assignment -name EDA_TEST_BENCH_FILE data_mem_init.dat -section_id test_top
+set_global_assignment -name EDA_TEST_BENCH_FILE testbench_chipset.sv -section_id test_chipset
+set_global_assignment -name EDA_TEST_BENCH_FILE testbench_dmem.sv -section_id testbench_dmem
+set_global_assignment -name EDA_TEST_BENCH_FILE data_mem_init.dat -section_id testbench_dmem
+set_global_assignment -name SYSTEMVERILOG_FILE glyph_rom.sv
+set_global_assignment -name SYSTEMVERILOG_FILE painter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE hvsync_generator.sv
+set_global_assignment -name SYSTEMVERILOG_FILE clockDivider.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vga.sv
 set_global_assignment -name SYSTEMVERILOG_FILE arith_unit.sv
 set_global_assignment -name SYSTEMVERILOG_FILE alu_defs.sv
 set_global_assignment -name SYSTEMVERILOG_FILE alu.sv
@@ -90,17 +109,37 @@ set_global_assignment -name SYSTEMVERILOG_FILE flopenr.sv
 set_global_assignment -name SYSTEMVERILOG_FILE chipset.sv
 set_global_assignment -name SYSTEMVERILOG_FILE testbench_chipset.sv
 set_global_assignment -name SYSTEMVERILOG_FILE testbench_dmem.sv
-set_global_assignment -name EDA_TEST_BENCH_NAME testbench_dmem -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench_dmem
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench_dmem -section_id testbench_dmem
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name EDA_TEST_BENCH_FILE test_alu.sv -section_id TESTBENCH_ALU
-set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id test_top
-set_global_assignment -name EDA_TEST_BENCH_FILE inst_mem_init.dat -section_id test_top
-set_global_assignment -name EDA_TEST_BENCH_FILE data_mem_init.dat -section_id test_top
-set_global_assignment -name EDA_TEST_BENCH_FILE testbench_chipset.sv -section_id test_chipset
-set_global_assignment -name EDA_TEST_BENCH_FILE testbench_dmem.sv -section_id testbench_dmem
-set_global_assignment -name EDA_TEST_BENCH_FILE data_mem_init.dat -section_id testbench_dmem
+set_global_assignment -name SYSTEMVERILOG_FILE dram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vram.sv
+set_location_assignment PIN_A11 -to clk_out
+set_location_assignment PIN_B11 -to hsync_out
+set_location_assignment PIN_B13 -to o_blue[0]
+set_location_assignment PIN_G13 -to o_blue[1]
+set_location_assignment PIN_H13 -to o_blue[2]
+set_location_assignment PIN_F14 -to o_blue[3]
+set_location_assignment PIN_H14 -to o_blue[4]
+set_location_assignment PIN_F15 -to o_blue[5]
+set_location_assignment PIN_G15 -to o_blue[6]
+set_location_assignment PIN_J14 -to o_blue[7]
+set_location_assignment PIN_J9 -to o_green[0]
+set_location_assignment PIN_J10 -to o_green[1]
+set_location_assignment PIN_H12 -to o_green[2]
+set_location_assignment PIN_G10 -to o_green[3]
+set_location_assignment PIN_G11 -to o_green[4]
+set_location_assignment PIN_G12 -to o_green[5]
+set_location_assignment PIN_F11 -to o_green[6]
+set_location_assignment PIN_E11 -to o_green[7]
+set_location_assignment PIN_A13 -to o_red[0]
+set_location_assignment PIN_C13 -to o_red[1]
+set_location_assignment PIN_E13 -to o_red[2]
+set_location_assignment PIN_B12 -to o_red[3]
+set_location_assignment PIN_C12 -to o_red[4]
+set_location_assignment PIN_D12 -to o_red[5]
+set_location_assignment PIN_E12 -to o_red[6]
+set_location_assignment PIN_F13 -to o_red[7]
+set_location_assignment PIN_D11 -to vsync_out
+set_location_assignment PIN_AA14 -to reset
+set_location_assignment PIN_AF14 -to clk
+set_location_assignment PIN_AE12 -to start
+
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

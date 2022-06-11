@@ -2,15 +2,34 @@ module dmem
 (
 	input logic clk, we,
 	input logic [31:0] a, wd,
-	output logic [31:0] rd
+	output logic [31:0] rd,
+	output [31:0] tex_o [2399:0]
 );
+
+	logic ram_select;
+	logic vram_select;
+	logic [13:0] addr;
 	
-	initial $readmemh("data_mem_init.dat",RAM);
+	assign addr = a[13:0];
+	assign vram_select = a[14] & we;
+	assign ram_select = !a[14] & we;
 	
-	logic [31:0] RAM[4095:0]; // 	512   	=>		0 hasta 2047 (dec)
-									 //				=>		000 hasta 7ff (hex)
+	dram cpu_ram
+	(
+		.clk(clk),
+		.we(ram_select),
+		.a(addr),
+		.wd(wd),
+		.rd(rd)
+	);
+
 	
-	always_ff @(posedge clk)
-		if (we) RAM[a[31:0]] <= wd;
-		else rd <= RAM[a[31:0]];
+	vram vram
+	(
+		.clk(clk),
+		.we(vram_select),
+		.a(addr),
+		.wd(wd),
+		.tex_o(tex_o)
+	);
 endmodule
