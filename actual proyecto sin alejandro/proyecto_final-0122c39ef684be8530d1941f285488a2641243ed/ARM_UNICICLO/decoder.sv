@@ -4,30 +4,31 @@ module decoder
 	input logic [5:0] Funct,
 	input logic [3:0] Rd,
 	output logic [1:0] FlagW,
-	output logic PCS, RegW, MemW, ByteMem,  // Se agrega la bandera ByteMem para diferenciar ldrb y strb
+	output logic PCS, RegW, MemW, 
 	output logic MemtoReg, ALUSrc,
 	output logic [1:0] ImmSrc, RegSrc, 
 	output logic [2:0] ALUControl
 );
 
-	logic [10:0] controls;
+	logic [9:0] controls;
 	logic Branch, ALUOp;
 	
 	// Main Decoder
 	always_comb
 		casex(Op)
 										
-			2'b00: if (Funct[5]) 								controls = 11'b00001010010; // Data-processing immediate			
-			else 														controls = 11'b00000010010; // Data-processing register 
+			2'b00: if (Funct[5] & Funct[4:1] == 4'b1010) 		controls = 10'b0000100001; // CMP Immediate
+					else if(!Funct[5] & Funct[4:1] == 4'b1010) 	controls = 10'b0000000001; // CMP Register
+					
+					else if(Funct[5])										controls = 10'b0000101001; // Data-processing immediate			
+					else 														controls = 10'b0000001001; // Data-processing register 
 				
-			2'b01: if (Funct[0] & !Funct[2])					controls = 11'b00011110000; // LDR
-			else if (Funct[0] & Funct[2])						controls = 11'b00011110001; // LDRB																    				
-			else if (!Funct[0] & !Funct[2]) 					controls = 11'b10011101000; // STR
-			else  								 					controls = 11'b10011101001; // STRB
+			2'b01: if (Funct[0])											controls = 10'b0001111000; // LDR														    				
+			else 					 											controls = 10'b1001110100; // STR
 										
-			2'b10: 													controls = 11'b01101000100; // Be
+			2'b10: 															controls = 10'b0110100010; // Be
 										
-			default: 												controls = 11'bx; 		    // Unimplemented
+			default: 														controls = 10'bx; 		    // Unimplemented
 			
 		endcase
 	
@@ -60,21 +61,25 @@ module decoder
 	// ALUControl, abajo esta el decoder.
 	
 		
+	//	CMP IMMEDIATE
+	//			00			00			1			0		  0     0     0      1
+	//	CMP REGISTER			
+	//			00			00			0			0		  0	  0	  0		1
 	// Data-processing immediate
-	//			00			00			1			0	  	  1	  0	  0		1		0
+	//			00			00			1			0	  	  1	  0	  0		1		
 	// Data-processing register
-	// 		00			00			0			0		  1	  0	  0		1		0
+	// 		00			00			0			0		  1	  0	  0		1		
 	// LDR
-	//			00			01			1			1		  1	  0	  0		0		0
+	//			00			01			1			1		  1	  0	  0		0		
 	// LDRB
-	//			00			01			1			1		  1	  0	  0	   0		1
+	//			00			01			1			1		  1	  0	  0	   0		
 	// STR
-	// 		10			01			1			1		  0	  1	  0		0		0
+	// 		10			01			1			1		  0	  1	  0		0		
 	// STRB
-	//			10			01			1			1		  0	  1	  0		0		1
+	//			10			01			1			1		  0	  1	  0		0		
 	// B
-	// 		01			10			1			0		  0	  0	  1		0		0
-	assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp, ByteMem} = controls;
+	// 		01			10			1			0		  0	  0	  1		0		
+	assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp} = controls;
 	
 	// ALU Decoder
 	always_comb
