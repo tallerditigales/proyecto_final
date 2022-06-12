@@ -15,7 +15,7 @@ module vga(
 	output [7:0] o_red,
 	output [7:0] o_blue,
 	output [7:0] o_green,
-	input [31:0] tex [2399:0]
+	input [31:0] tex [2239:0]
 );
 	import constants::*;
 	
@@ -28,9 +28,7 @@ module vga(
 	logic [7:0] r_green;
 	logic [7:0] r_blue;
 	logic res;
-	
-//	logic [2399:0][6:0] matrix = {RAM[0][30:24], RAM[0][23:17], RAM[0][16:10], RAM[0][9:3]};
-//	logic [][6:0] matrix = {7'd65,7'd66,7'd67,7'd68,7'd69,7'd70,7'd71};
+	logic [15:0] colors;
 	 
 	clockDivider clk_div(
 		.clk_in(clk_fpga),
@@ -51,14 +49,15 @@ module vga(
 		.horzCoord(CounterX), // current position.x
 		.vertCoord(CounterY), // current position.y
 		.pixel(res),  // result, 1 if current pixel is on text, 0 otherwise
-		.tex(tex)
+		.tex(tex),
+		.colors(colors)
 		);
 
 
 always_ff @(posedge clk_25)
 	begin
 		if (res)
-			{r_red, r_green, r_blue} <= WHITE;
+			{r_red, r_green, r_blue} <= colors;
 		else
 			{r_red, r_green, r_blue} <= BLUE;
 	end

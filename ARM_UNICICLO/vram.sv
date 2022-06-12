@@ -3,9 +3,9 @@ module vram
 	input logic clk, we,
 	input logic [13:0] a,
 	input logic [31:0] wd,
-	output [31:0] tex_o [2399:0]
+	output [31:0] tex_o [2239:0]
 );
-	logic [31:0] tex [2399:0];
+	logic [31:0] tex [2239:0];
 
 	assign tex_o = tex;
 

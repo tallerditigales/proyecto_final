@@ -6,7 +6,7 @@ module dram
 	output logic [31:0] rd
 );
 	
-//	initial $readmemh("data_mem_init.dat",RAM);
+	initial $readmemh("data_mem_init.dat",RAM);
 	
 	logic [31:0] RAM[4095:0];
 	

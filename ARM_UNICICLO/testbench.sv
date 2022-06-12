@@ -6,7 +6,7 @@ module testbench();
 	logic MemWrite;
 	
 	// instantiate device to be tested
-	top dut(clk, reset, start, WriteData, DataAdr, MemWrite);
+	top dut(.clk(clk), .reset(reset), .start(start));
 	
 	// initialize test
 	initial begin
