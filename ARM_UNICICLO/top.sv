@@ -12,7 +12,7 @@ module top
 	logic [31:0] WriteData, DataAdr;
 	logic MemWrite;
 	logic [31:0] PC, Instr, ReadData;
-	logic [31:0] tex [2399:0];
+	wire [31:0] tex [2239:0];
 	
 	vga display(
 		.clk_fpga(clk),
