@@ -8,7 +8,7 @@ module dram
 	
 	initial $readmemh("data_mem_init.dat",RAM);
 	
-	logic [31:0] RAM[127:0];
+	logic [31:0] RAM[255:0];
 	
 	always_ff @(posedge clk) begin
 		if (we)

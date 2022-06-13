@@ -6,6 +6,7 @@ for char in texto:
     hex = "".join(["{:02x}".format(ord(c)) for c in char])
     hex = "000000"+ str(hex) + "\n"
     file.writelines(hex)
+file.write( "00000000")
 
 file.close()
 

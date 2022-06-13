@@ -1,6 +1,5 @@
-			
-start:
-			MOV		r0,#0		
+			mov		r8,#0x4000 	// A partir de esta direccion escribe la palabra modificada
+			MOV		r0,#0		// Puntero principal del caracter que se esta analizando
 			MOV		r2,#0 		
 			MOV		r3,#0			
 			MOV		r4,#0xFF000000
@@ -8,7 +7,7 @@ start:
 			mov		r7,#0x00FF0000
 			
 			mov		r5,#0
-			mov		r8,#0x4000 // guarda aqui
+			
 			
 			
 			
