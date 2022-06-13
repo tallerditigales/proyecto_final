@@ -10,6 +10,6 @@ module imem
 	initial
 		$readmemh("inst_mem_init.dat",RAM);
 	
-	always_ff @(negedge clk) rd <= RAM[a[31:2]];
+	assign rd = RAM[a[31:2]];
 	
 endmodule
