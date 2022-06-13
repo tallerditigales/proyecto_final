@@ -1,3 +1,4 @@
+import arm_const::*;
 module top
 (
 	input logic clk, reset, start,
@@ -12,7 +13,7 @@ module top
 	logic [31:0] WriteData, DataAdr;
 	logic MemWrite;
 	logic [31:0] PC, Instr, ReadData;
-	wire [31:0] tex [2239:0];
+	wire [31:0] tex [VGA_SCREEN_SIZE-1:0];
 	
 	vga display(
 		.clk_fpga(clk),
@@ -25,11 +26,12 @@ module top
 		.tex(tex)
 	);
 	
+	
 	// instantiate processor and memories
 	arm arm(clk, reset, start, PC, Instr, MemWrite, DataAdr,
 				WriteData, ReadData);
 	
-	imem imem(PC, Instr);
+	imem imem(PC, clk, Instr);
 	
 	dmem dmem(clk, MemWrite, DataAdr, WriteData, ReadData, tex);
 	

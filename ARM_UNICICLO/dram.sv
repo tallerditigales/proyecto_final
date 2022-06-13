@@ -8,10 +8,13 @@ module dram
 	
 	initial $readmemh("data_mem_init.dat",RAM);
 	
-	logic [31:0] RAM[4095:0];
+	logic [31:0] RAM[127:0];
 	
-	always_ff @(posedge clk)
-		if (we) RAM[a[13:0]] <= wd;
-		else rd <= RAM[a[13:0]];
+	always_ff @(posedge clk) begin
+		if (we)
+			RAM[a[13:2]] = wd;
+	end
+	
+	assign rd = RAM[a[13:2]];
 
 endmodule

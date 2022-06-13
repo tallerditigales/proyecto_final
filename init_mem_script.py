@@ -8,3 +8,5 @@ for char in texto:
     file.writelines(hex)
 
 file.close()
+
+print(f"El texto tiene una longitud de: {len(texto)}")

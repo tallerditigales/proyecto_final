@@ -1,9 +1,10 @@
+import arm_const::*;
 module dmem
 (
 	input logic clk, we,
 	input logic [31:0] a, wd,
 	output logic [31:0] rd,
-	output [31:0] tex_o [2239:0]
+	output [31:0] tex_o [VGA_SCREEN_SIZE-1:0]
 );
 
 	logic ram_select;

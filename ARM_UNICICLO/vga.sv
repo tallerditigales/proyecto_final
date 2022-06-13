@@ -1,11 +1,4 @@
-package constants;
-	parameter BLUE = 24'h0096FF;
-	parameter WHITE = 24'hFFFFFF;
-	parameter ORANGE = 24'hFD8000;
-	parameter YELLOW = 24'hD1F523;
-	parameter DARK = 24'h000000;
-	parameter GREEN = 24'h228B22;
-endpackage
+import arm_const::*;
 
 module vga(
 	input clk_fpga,
@@ -15,9 +8,8 @@ module vga(
 	output [7:0] o_red,
 	output [7:0] o_blue,
 	output [7:0] o_green,
-	input [31:0] tex [2239:0]
+	input [31:0] tex [VGA_SCREEN_SIZE-1:0]
 );
-	import constants::*;
 	
 	logic inDisplayArea;
 	logic [9:0] CounterX;
@@ -28,7 +20,7 @@ module vga(
 	logic [7:0] r_green;
 	logic [7:0] r_blue;
 	logic res;
-	logic [15:0] colors;
+	logic [23:0] colors;
 	 
 	clockDivider clk_div(
 		.clk_in(clk_fpga),
