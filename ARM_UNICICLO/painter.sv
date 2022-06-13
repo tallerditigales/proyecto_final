@@ -5,7 +5,7 @@ module painter
 	input clk,
 	input [9:0] horzCoord,
 	input [9:0] vertCoord,
-	input [31:0] tex [VGA_SCREEN_SIZE:0],
+	input [31:0] tex [VGA_SCREEN_SIZE-1:0],
 	output logic pixel,
 	output logic [23:0] colors
 );
