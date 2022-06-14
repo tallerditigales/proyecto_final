@@ -11,11 +11,7 @@ module DRAM
 	logic [31:0] RAM[255:0];
 	
 	always_ff @(posedge clk) begin
-		if (we) begin
-		
-				RAM[a[13:2]] = wd;
-
-			end
+		if (we) RAM[a[13:2]] <= wd;
 	end
 	
 	assign rd = RAM[a[13:2]];
