@@ -33,6 +33,6 @@ module TEXT_PROCESSOR_TOP
 	
 	INST_ROM inst_rom_(PC, Instr);
 	
-	DATA_RAM data_ram_(clk, MemWrite, DataAdr, WriteData, ReadData, tex, reset);
+	DATA_RAM data_ram_(clk, MemWrite, DataAdr, WriteData, ReadData, tex);
 	
 endmodule

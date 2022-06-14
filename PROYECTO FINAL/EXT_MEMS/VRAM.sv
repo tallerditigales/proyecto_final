@@ -4,15 +4,13 @@ module VRAM
 	input logic clk, we,
 	input logic [13:0] a,
 	input logic [31:0] wd,
-	input reset,
 	output [31:0] tex_o [VGA_SCREEN_SIZE-1:0]
 );
 	logic [31:0] tex [VGA_SCREEN_SIZE-1:0];
 
 	assign tex_o = tex;
 
-	always_ff @(posedge clk) begin
-		if (reset) tex <= '{default:'0};
+	always_ff @(posedge clk)
 		if (we) begin 
 			tex[a[13:2]] <= wd;
 			
@@ -26,7 +24,5 @@ module VRAM
 				24'h00ff00: $display("COLOR RGB:-------- VERDE");
 				24'hff0000: $display("COLOR RGB:-------- ROJO");
 			endcase
-			
 		end
-	end
 endmodule
