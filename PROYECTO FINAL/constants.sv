@@ -1,5 +1,5 @@
 package arm_const;
-	parameter VGA_SCREEN_SIZE = 960;
+	parameter VGA_SCREEN_SIZE = 560;
 	parameter BLUE = 24'h0096FF;
 	parameter WHITE = 24'hFFFFFF;
 	parameter ORANGE = 24'hFD8000;
