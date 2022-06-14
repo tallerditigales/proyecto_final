@@ -18,6 +18,12 @@ module VRAM
 			$display("Address:---------- %h", a);
 			$display("Write data:------- %h", wd);
 			$display("ASCII:------------ %c", wd[7:0]);
-			$display("COLOR RGB:-------- #%h", a[31:8]);
+			
+			case (wd[31:8])
+				24'h000000: $display("COLOR RGB:-------- NEGRO");
+				24'h00ff00: $display("COLOR RGB:-------- VERDE");
+				24'hff0000: $display("COLOR RGB:-------- ROJO");
+			endcase
+			
 		end
 endmodule
