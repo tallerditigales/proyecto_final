@@ -12,6 +12,13 @@ module vram
 	assign tex_o = tex;
 
 	always_ff @(posedge clk)
-		if (we) tex[a[13:2]] <= wd;
-
+		if (we) begin 
+			tex[a[13:2]] <= wd;
+			
+			$display("\n\n-----Write cycle---(vram)--");
+			$display("Address:---------- %h", a);
+			$display("Write data:------- %h", wd);
+			$display("ASCII:------------ %c", wd[7:0]);
+			$display("COLOR RGB:-------- #%h", a[31:8]);
+		end
 endmodule

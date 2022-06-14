@@ -11,8 +11,17 @@ module dram
 	logic [31:0] RAM[255:0];
 	
 	always_ff @(posedge clk) begin
-		if (we)
-			RAM[a[13:2]] = wd;
+		if (we) begin
+		
+				RAM[a[13:2]] = wd;
+				
+				$display("\n\n-----Write cycle---(dram)--");
+				$display("Address:---------- %h", a);
+				$display("Write data:------- %h", wd);
+				$display("ASCII:------------ %c", wd[7:0]);
+				$display("COLOR RGB:-------- #%h", a[31:8]);
+
+			end
 	end
 	
 	assign rd = RAM[a[13:2]];
