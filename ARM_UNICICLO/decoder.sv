@@ -105,6 +105,6 @@ module decoder
 		end
 		
 	// PC Logic
-	assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
+	assign PCS = Branch;
 	
 endmodule
