@@ -7,11 +7,6 @@ textFile = "phrase.txt"
 fle = Path(textFile)
 fle.touch(exist_ok=True)
 f = open(fle)
-
-#to current working directory
-save_path = "ARM_UNICICLO"
-file_name = "data_mem_init.dat"
-completeName = os.path.join(save_path, file_name)
     
 ## READ
 def read(file):
@@ -21,7 +16,7 @@ def read(file):
     return text
 
 def script(text):
-    file = open(completeName, "w") 
+    file = open("data_mem_init.dat", "w") 
     # response = input("Digitar palabra ")
     # texto = input("Ingrese el texto: ")
     for char in text:
