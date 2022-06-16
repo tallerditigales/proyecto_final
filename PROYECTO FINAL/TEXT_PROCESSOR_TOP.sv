@@ -27,7 +27,6 @@ module TEXT_PROCESSOR_TOP
 	);
 	
 	
-	// instantiate processor and memories
 	CPU cpu_(clk, reset, start, PC, Instr, MemWrite, DataAdr,
 				WriteData, ReadData);
 	

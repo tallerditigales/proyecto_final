@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("/home/alejandro/projects/taller_digitales/proyecto_entrega/PROYECTO FINAL/output_files/") File("ARM_TEXT_PROCESSOR.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("C:/Users/carlo/OneDrive/Escritorio/proyecto_final/PROYECTO FINAL/output_files/") File("ARM_TEXT_PROCESSOR.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
